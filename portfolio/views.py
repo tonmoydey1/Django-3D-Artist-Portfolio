@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
+from django.core.mail import BadHeaderError
 
 
 def index(request):
@@ -52,13 +53,21 @@ def send_enquiry(request):
         {message}
         """
 
-        send_mail(
-            subject,
-            full_message,
-            settings.EMAIL_HOST_USER,
-            ['tonmoydeyrick@gmail.com'],
-            fail_silently=False
-        )
+        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+            messages.error(request, "Email is not configured yet. Please contact me directly.")
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+
+        try:
+            send_mail(
+                subject,
+                full_message,
+                settings.DEFAULT_FROM_EMAIL,
+                ['tonmoydeyrick@gmail.com'],
+                fail_silently=False
+            )
+        except BadHeaderError:
+            messages.error(request, "Invalid message header. Please try again.")
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
         messages.success(request, "Message Sent Successfully!")
 
