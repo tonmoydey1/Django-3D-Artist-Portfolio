@@ -1,16 +1,43 @@
 # views.py
 
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import BadHeaderError
-from smtplib import SMTPException
 import logging
 from .models import Enquiry
+from urllib import parse, request as urlrequest
+from urllib.error import URLError
 
 
 logger = logging.getLogger(__name__)
+
+
+def send_web3forms_enquiry(name, email, subject, message):
+    if not settings.WEB3FORMS_ACCESS_KEY:
+        return False
+
+    payload = parse.urlencode({
+        'access_key': settings.WEB3FORMS_ACCESS_KEY,
+        'name': name,
+        'email': email,
+        'subject': subject or 'New portfolio enquiry',
+        'message': message,
+        'from_name': 'Tonmoy 3D Artist Portfolio',
+    }).encode()
+
+    req = urlrequest.Request(
+        'https://api.web3forms.com/submit',
+        data=payload,
+        headers={'Content-Type': 'application/x-www-form-urlencoded'},
+        method='POST',
+    )
+
+    try:
+        with urlrequest.urlopen(req, timeout=8) as response:
+            return 200 <= response.status < 300
+    except URLError as exc:
+        logger.warning("Web3Forms delivery failed: %s", exc)
+        return False
 
 
 def index(request):
@@ -57,42 +84,7 @@ def send_enquiry(request):
             message=message,
         )
 
-        full_message = f"""
-        Name: {name}
-        Email: {email}
-        Subject: {subject}
-
-        Message:
-        {message}
-        """
-
-        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-            messages.success(request, "Message Sent Successfully!")
-            return redirect(request.META.get('HTTP_REFERER', '/'))
-
-        sent_count = 0
-
-        try:
-            sent_count = send_mail(
-                subject,
-                full_message,
-                settings.DEFAULT_FROM_EMAIL,
-                ['tonmoydeyrick@gmail.com'],
-                fail_silently=True
-            )
-        except BadHeaderError:
-            messages.success(request, "Message Sent Successfully!")
-            return redirect(request.META.get('HTTP_REFERER', '/'))
-        except (SMTPException, OSError) as exc:
-            logger.warning("Contact form email failed: %s", exc)
-            messages.success(request, "Message Sent Successfully!")
-            return redirect(request.META.get('HTTP_REFERER', '/'))
-        except Exception as exc:
-            logger.exception("Unexpected contact form error: %s", exc)
-            messages.success(request, "Message Sent Successfully!")
-            return redirect(request.META.get('HTTP_REFERER', '/'))
-
-        if sent_count:
+        if send_web3forms_enquiry(name, email, subject, message):
             enquiry.email_sent = True
             enquiry.save(update_fields=['email_sent'])
 
