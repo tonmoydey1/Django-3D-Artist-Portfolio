@@ -6,6 +6,10 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.mail import BadHeaderError
 from smtplib import SMTPException
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -69,7 +73,12 @@ def send_enquiry(request):
         except BadHeaderError:
             messages.error(request, "Invalid message header. Please try again.")
             return redirect(request.META.get('HTTP_REFERER', '/'))
-        except SMTPException:
+        except (SMTPException, OSError) as exc:
+            logger.warning("Contact form email failed: %s", exc)
+            messages.error(request, "Email could not be sent right now. Please contact me directly.")
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+        except Exception as exc:
+            logger.exception("Unexpected contact form error: %s", exc)
             messages.error(request, "Email could not be sent right now. Please contact me directly.")
             return redirect(request.META.get('HTTP_REFERER', '/'))
 
