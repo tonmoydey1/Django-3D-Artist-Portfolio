@@ -135,8 +135,9 @@
 
         <p>Fill out the form and I'll get back to you shortly.</p>
 
-        <form method="POST" action="{% url 'send_enquiry' %}">
-          {% csrf_token %}
+        <form method="POST" action="https://api.web3forms.com/submit">
+          <input type="hidden" name="access_key" value="{{ web3forms_access_key }}" />
+          <input type="hidden" name="redirect" value="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}?sent=1" />
 
           <div class="input-row">
             <input type="text" name="name" placeholder="Your Name" required />
