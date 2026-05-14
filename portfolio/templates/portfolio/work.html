@@ -1,0 +1,388 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Work | 3D Artist</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/work.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/premium.css' %}" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+
+    {% if messages %}
+
+    <div class="message-container">
+      {% for message in messages %}
+
+      <div class="success-popup">{{ message }}</div>
+
+      {% endfor %}
+    </div>
+
+    {% endif %}
+
+    <header class="navbar">
+      {% include 'portfolio/logo.html' %}
+
+      <nav id="navMenu">
+        <a href="{% url 'home' %}">Home</a>
+
+        <a href="{% url 'about' %}">About</a>
+
+        <a href="{% url 'work' %}" class="active"> Work </a>
+
+        <a href="{% url 'services' %}">Services</a>
+
+        <a href="{% url 'contact' %}">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button">
+        <i class="fa-solid fa-sun"></i>
+        <span class="theme-label">Light</span>
+      </button>
+
+      <button class="nav-btn" id="workTogetherBtn">Let's Work Together</button>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero-section">
+      <div class="hero-left">
+        <p class="small-title">MY WORK</p>
+
+        <h1>
+          Crafting visuals <br />
+          that tell a <span>story.</span>
+        </h1>
+
+        <p>
+          Explore a selection of my 3D projects across different styles and
+          industries. Each project is a blend of creativity, technique, and
+          attention to detail.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <img src="{% static 'images/profile/tonmoy-dey-portrait.jpeg' %}" alt="Tonmoy Dey portrait" />
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+
+    <section class="filter-section">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+
+        <button class="filter-btn" data-filter="modeling">3D Modeling</button>
+
+        <button class="filter-btn" data-filter="props">Props</button>
+
+        <button class="filter-btn" data-filter="environment">
+          Environment
+        </button>
+
+        <button class="filter-btn" data-filter="product">Product</button>
+
+        <button class="filter-btn" data-filter="vehicle">Vehicles</button>
+
+        <button class="filter-btn" data-filter="scifi">Sci-Fi</button>
+
+        <button class="filter-btn" data-filter="character">Character</button>
+      </div>
+    </section>
+
+    <!-- WORK GRID -->
+
+    <section class="work-grid">
+      <div class="work-card vehicle modeling featured">
+        <img src="{% static 'images/portfolio/sleeper-coach-wide.jpg' %}" alt="Sleeper coach train model" />
+        <h3>Sleeper Coach</h3>
+        <span>Vehicle Modeling</span>
+        <p>Large-scale Indian sleeper coach asset with worn paint, bogie details, and cinematic studio lighting.</p>
+      </div>
+
+      <div class="work-card vehicle environment">
+        <img src="{% static 'images/portfolio/snow-railway-scene.jpg' %}" alt="Snow railway scene" />
+        <h3>Snow Railway Scene</h3>
+        <span>Environment</span>
+        <p>Outdoor railway scene with terrain dressing, overhead lines, rolling stock, and bright winter lighting.</p>
+      </div>
+
+      <div class="work-card vehicle environment">
+        <img src="{% static 'images/portfolio/snow-freight-train.jpg' %}" alt="Snow freight train environment" />
+        <h3>Freight Train Landscape</h3>
+        <span>Environment</span>
+        <p>Expansive rail environment combining freight wagons, snowy ground materials, and mountain composition.</p>
+      </div>
+
+      <div class="work-card vehicle environment">
+        <img src="{% static 'images/portfolio/night-rail-station.jpg' %}" alt="Night rail station render" />
+        <h3>Night Rail Station</h3>
+        <span>Environment Lighting</span>
+        <p>Moody night station composition with red architecture, train tracks, freight cars, and low-key lighting.</p>
+      </div>
+
+      <div class="work-card vehicle modeling">
+        <img src="{% static 'images/portfolio/weathered-diesel-locomotive.jpg' %}" alt="Weathered diesel locomotive model" />
+        <h3>Weathered Diesel Locomotive</h3>
+        <span>Vehicle Modeling</span>
+        <p>Detailed diesel engine asset with rail base, weathered orange paint, illuminated lamps, and mechanical forms.</p>
+      </div>
+
+      <div class="work-card scifi modeling">
+        <img src="{% static 'images/portfolio/samaritan-sci-fi-weapon.jpg' %}" alt="Samaritan sci-fi weapon" />
+        <h3>Samaritan Heavy Blaster</h3>
+        <span>Sci-Fi Hard Surface</span>
+        <p>Detailed futuristic weapon model with layered panels, technical components, and graphic decals.</p>
+      </div>
+
+      <div class="work-card scifi modeling">
+        <img src="{% static 'images/portfolio/grey-sci-fi-rifle.jpg' %}" alt="Grey sci-fi rifle" />
+        <h3>Tactical Sci-Fi Rifle</h3>
+        <span>Sci-Fi Modeling</span>
+        <p>Clean hard-surface rifle with modular stock, mounted optic, glowing accents, and mechanical forms.</p>
+      </div>
+
+      <div class="work-card scifi modeling">
+        <img src="{% static 'images/portfolio/red-grey-sci-fi-rifle.jpg' %}" alt="Red and grey sci-fi rifle" />
+        <h3>Industrial Energy Rifle</h3>
+        <span>Weapon Design</span>
+        <p>Chunky red-and-grey weapon concept with layered metal panels, barrel mechanics, and bold silhouette.</p>
+      </div>
+
+      <div class="work-card scifi product">
+        <img src="{% static 'images/portfolio/compact-sci-fi-pistol.jpg' %}" alt="Compact sci-fi pistol" />
+        <h3>Compact Plasma Pistol</h3>
+        <span>Product Prop</span>
+        <p>Stylized compact sci-fi sidearm with graphic red accents and polished hard-surface presentation.</p>
+      </div>
+
+      <div class="work-card scifi product">
+        <img src="{% static 'images/portfolio/sci-fi-unlock-device.jpg' %}" alt="Sci-fi unlock device" />
+        <h3>Encrypted Unlock Device</h3>
+        <span>Tech Product</span>
+        <p>Futuristic security-device set with emissive screen graphics, coiled cables, and black industrial casing.</p>
+      </div>
+
+      <div class="work-card scifi product">
+        <img src="{% static 'images/portfolio/motion-tracker-prop.jpg' %}" alt="Motion tracker prop model" />
+        <h3>Motion Tracker Device</h3>
+        <span>Sci-Fi Prop</span>
+        <p>Handheld tracker concept with radar display, cable detail, worn black casing, and emissive interface elements.</p>
+      </div>
+
+      <div class="work-card environment">
+        <img src="{% static 'images/portfolio/medieval-tavern-interior.webp' %}" alt="Medieval tavern interior" />
+        <h3>Medieval Tavern Interior</h3>
+        <span>Interior Environment</span>
+        <p>Warm fantasy room scene with stone walls, wooden furniture, props, treasure chest, and table dressing.</p>
+      </div>
+
+      <div class="work-card environment">
+        <img src="{% static 'images/portfolio/moody-mansion-environment.jpg' %}" alt="Moody mansion environment" />
+        <h3>Moody Mansion Exterior</h3>
+        <span>Environment Lighting</span>
+        <p>Atmospheric exterior scene with wet ground, foliage, gated architecture, and dramatic night mood.</p>
+      </div>
+
+      <div class="work-card environment">
+        <img src="{% static 'images/portfolio/forest-temple-environment.jpg' %}" alt="Forest temple environment" />
+        <h3>Forest Temple Path</h3>
+        <span>Environment Lighting</span>
+        <p>Sunlit forest pathway scene with dense foliage, stone lanterns, temple architecture, and atmospheric depth.</p>
+      </div>
+
+      <div class="work-card environment">
+        <img src="{% static 'images/portfolio/oggys-house-render.jpg' %}" alt="Oggy's house render" />
+        <h3>Oggy's House</h3>
+        <span>Stylized Environment</span>
+        <p>Bright stylized house render with playful colors, clean forms, and cartoon-inspired composition.</p>
+      </div>
+
+      <div class="work-card environment modeling">
+        <img src="{% static 'images/portfolio/small-concrete-house.jpg' %}" alt="Small concrete house model" />
+        <h3>Weathered Concrete House</h3>
+        <span>Environment Asset</span>
+        <p>Rural building asset with aged plaster, corrugated roof, wooden door, and grounded texture work.</p>
+      </div>
+
+      <div class="work-card props product">
+        <img src="{% static 'images/portfolio/gasoline-danger-can.jpg' %}" alt="Gasoline danger can prop" />
+        <h3>Vintage Gasoline Can</h3>
+        <span>Prop Texturing</span>
+        <p>Weathered fuel can with scratched red paint, warning typography, grime buildup, and worn metal edges.</p>
+      </div>
+
+      <div class="work-card props product">
+        <img src="{% static 'images/portfolio/green-vintage-lantern.jpg' %}" alt="Green vintage lantern" />
+        <h3>Vintage Lantern</h3>
+        <span>Prop Modeling</span>
+        <p>Rusty green lantern with glass, burner details, aged paint, and realistic material breakup.</p>
+      </div>
+
+      <div class="work-card props product">
+        <img src="{% static 'images/portfolio/steampunk-lamp-radio.jpg' %}" alt="Steampunk lamp radio" />
+        <h3>Steampunk Lamp Radio</h3>
+        <span>Hero Prop</span>
+        <p>Inventive retro-futurist desk prop with glowing lamps, gauges, pipes, and warm cinematic lighting.</p>
+      </div>
+
+      <div class="work-card props product">
+        <img src="{% static 'images/portfolio/antique-telephone.jpg' %}" alt="Antique telephone model" />
+        <h3>Antique Telephone</h3>
+        <span>Product Visualization</span>
+        <p>Classic brass-and-black telephone with coiled cable, dial details, and premium studio presentation.</p>
+      </div>
+
+      <div class="work-card props product">
+        <img src="{% static 'images/portfolio/vintage-gas-pump.jpg' %}" alt="Vintage gas pump" />
+        <h3>Vintage Gas Pump</h3>
+        <span>Product Prop</span>
+        <p>Aged fuel pump asset with hoses, metal grime, chipped paint, and believable garage-era wear.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/battle-axe-prop.webp' %}" alt="Battle axe prop" />
+        <h3>Battle Axe</h3>
+        <span>Game Prop</span>
+        <p>Stylized double axe with rough metal, chipped red paint, carved handle, and fantasy asset readability.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/rusted-grenade-prop.jpg' %}" alt="Rusted grenade prop" />
+        <h3>Rusted Grenade</h3>
+        <span>Game Prop</span>
+        <p>Weathered grenade prop with oxidized metal, aged pin detail, rough surface breakup, and grounded realism.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/aged-fire-extinguisher.jpg' %}" alt="Aged fire extinguisher" />
+        <h3>Aged Fire Extinguisher</h3>
+        <span>Realistic Prop</span>
+        <p>Real-world safety prop with worn label, hose assembly, rust, and distressed cylinder material.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/red-fire-hydrant.jpg' %}" alt="Red fire hydrant" />
+        <h3>Fire Hydrant</h3>
+        <span>Urban Prop</span>
+        <p>Chunky hydrant asset with chains, chipped red paint, oxidized dirt, and practical game-ready form.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/red-post-box.jpg' %}" alt="Red post box" />
+        <h3>Indian Post Box</h3>
+        <span>Street Prop</span>
+        <p>Recognizable red postal asset with stone base, embossed details, and weathered surface treatment.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/industrial-metal-crate.webp' %}" alt="Industrial metal crate" />
+        <h3>Industrial Metal Crate</h3>
+        <span>Hard Surface Prop</span>
+        <p>Heavy weathered container with ribbed lid, dark green paint, metal edge damage, and rust passes.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/rusted-bus-stop.webp' %}" alt="Rusted bus stop" />
+        <h3>Rusted Bus Stop</h3>
+        <span>Urban Asset</span>
+        <p>Detailed shelter model with worn seating, metal frame, weathered panels, and transit signage.</p>
+      </div>
+
+      <div class="work-card props product">
+        <img src="{% static 'images/portfolio/blue-pressure-tank.jpg' %}" alt="Blue pressure tank" />
+        <h3>Industrial Pressure Tank</h3>
+        <span>Product Prop</span>
+        <p>Blue pressure vessel with gauges, pipes, labels, rust, and industrial surface storytelling.</p>
+      </div>
+
+      <div class="work-card props modeling">
+        <img src="{% static 'images/portfolio/green-electrical-box.jpg' %}" alt="Green electrical box" />
+        <h3>Electrical Utility Box</h3>
+        <span>Urban Prop</span>
+        <p>Graffiti-marked electrical box with concrete plinth, warning labels, chipped paint, and grime.</p>
+      </div>
+
+      <div class="work-card vehicle modeling">
+        <img src="{% static 'images/portfolio/military-jeep-model.jpg' %}" alt="Military jeep model" />
+        <h3>Military Jeep</h3>
+        <span>Vehicle Modeling</span>
+        <p>Stylized utility jeep set with oversized tires, spare wheel, military markings, and clean render angles.</p>
+      </div>
+
+      <div class="work-card character">
+        <img src="{% static 'images/portfolio/minion-character.webp' %}" alt="Minion character render" />
+        <h3>Stylized Minion Character</h3>
+        <span>Character Modeling</span>
+        <p>Friendly stylized character model with clean shapes, expressive face, goggles, and balanced materials.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="contact-section" id="contact">
+      <div class="contact-left">
+        <div class="icon-circle">
+          <i class="fa-regular fa-paper-plane"></i>
+        </div>
+
+        <div class="contact-text">
+          <h2>Have a project in mind?</h2>
+
+          <p>Let's collaborate and bring your ideas to life.</p>
+        </div>
+      </div>
+
+      <button class="dark-btn" id="getTouchBtn">Get In Touch</button>
+    </section>
+
+    <!-- POPUP -->
+
+    <div class="popup-overlay" id="popup">
+      <div class="popup-box">
+        <span class="close-popup" id="closePopup"> &times; </span>
+
+        <h2>Contact Me</h2>
+
+        <form method="POST" action="{% url 'send_enquiry' %}">
+          {% csrf_token %}
+
+          <input type="text" name="name" placeholder="Your Name" required />
+
+          <input type="email" name="email" placeholder="Your Email" required />
+
+          <input type="text" name="subject" placeholder="Subject" required />
+
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Your Message"
+            required
+          ></textarea>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+    {% include 'portfolio/footer.html' %}
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/work.js' %}"></script>
+  </body>
+</html>

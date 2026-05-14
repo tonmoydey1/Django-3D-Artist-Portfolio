@@ -1,0 +1,263 @@
+<!-- templates/index.html -->
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Artist Portfolio</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/premium.css' %}" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+
+    {% if messages %}
+
+    <div class="message-container">
+      {% for message in messages %}
+
+      <div class="success-popup">{{ message }}</div>
+
+      {% endfor %}
+    </div>
+
+    {% endif %}
+    <header class="navbar">
+      {% include 'portfolio/logo.html' %}
+
+      <nav id="navMenu">
+        <a href="#home"  class="active">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'work' %}">Work</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button">
+        <i class="fa-solid fa-sun"></i>
+        <span class="theme-label">Light</span>
+      </button>
+
+      <button class="nav-btn" id="workTogetherBtn">Let's Work Together</button>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-left">
+        <p class="small-title">3D ARTIST & VISUAL DESIGNER</p>
+
+        <h1>
+          Bringing Ideas <br />
+          to <span>3D</span> Life
+        </h1>
+
+        <p class="hero-text">
+          I create detailed 3D props, vehicles, environments, and product visuals
+          with polished modeling, weathered textures, and cinematic presentation.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="dark-btn" id="viewWorkBtn">View My Work</button>
+
+          <button class="light-btn" id="aboutBtn">About Me</button>
+        </div>
+
+      </div>
+
+      <div class="hero-right">
+        <img src="{% static 'images/profile/tonmoy-dey-portrait.jpeg' %}" alt="Tonmoy Dey portrait" />
+
+        <div class="availability-box">
+          <span class="dot"></span>
+          Available for Freelance Projects
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="featured-work" id="work">
+      <div class="section-header">
+        <h2>Featured Work</h2>
+      </div>
+
+      <div class="work-grid">
+        <div class="work-card">
+          <img src="{% static 'images/portfolio/green-electrical-box.jpg' %}" alt="Electrical utility box prop" />
+          <h3>Electrical Utility Box</h3>
+          <p>Urban Prop</p>
+        </div>
+
+        <div class="work-card">
+          <img src="{% static 'images/portfolio/medieval-tavern-interior.webp' %}" alt="Medieval tavern interior" />
+          <h3>Medieval Tavern</h3>
+          <p>Environment Art</p>
+        </div>
+
+        <div class="work-card">
+          <img src="{% static 'images/portfolio/samaritan-sci-fi-weapon.jpg' %}" alt="Samaritan sci-fi weapon" />
+          <h3>Samaritan Blaster</h3>
+          <p>Hard Surface</p>
+        </div>
+
+        <div class="work-card">
+          <img src="{% static 'images/portfolio/steampunk-lamp-radio.jpg' %}" alt="Steampunk lamp radio" />
+          <h3>Steampunk Lamp Radio</h3>
+          <p>Hero Prop</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="about-left">
+        <img
+          src="{% static 'images/profile/tonmoy-dey-portrait.jpeg' %}"
+          alt=""
+          class="profile-img"
+        />
+      </div>
+
+      <div class="about-center">
+        <p class="small-title">ABOUT ME</p>
+
+        <h2>Passionate about creating stunning 3D visuals</h2>
+
+        <p>
+          I'm a 3D Artist focused on clean hard-surface modeling, believable
+          texture wear, and presentation-ready renders for games, products,
+          environments, and visual storytelling.
+        </p>
+
+        <a
+          href="{% static 'resume/Tonmoy_Dey_Resume_V5.pdf' %}"
+          download
+          class="light-btn"
+        >
+          Download Resume
+        </a>
+      </div>
+
+      <div class="about-right">
+        <div class="stats-box">
+          <h3>2+</h3>
+          <p>Years of Experience</p>
+        </div>
+
+        <div class="stats-box">
+          <h3>20+</h3>
+          <p>Projects Completed</p>
+        </div>
+
+        <div class="stats-box">
+          <h3>10+</h3>
+          <p>Happy Clients</p>
+        </div>
+
+        <div class="stats-box">
+          <h3>2</h3>
+          <p>Awards Received</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="services">
+      <div class="section-header">
+        <h2>What I Do</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fa-solid fa-cube"></i>
+          <h3>3D Modeling</h3>
+          <p>
+            High-quality 3D models created with precision and attention to
+            detail.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <i class="fa-solid fa-palette"></i>
+          <h3>Texturing & Materials</h3>
+          <p>Realistic textures and materials to bring your models to life.</p>
+        </div>
+
+        <div class="service-card">
+          <i class="fa-solid fa-lightbulb"></i>
+          <h3>Lighting & Rendering</h3>
+          <p>
+            Professional lighting and photorealistic renders for any project.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <i class="fa-solid fa-film"></i>
+          <h3>3D Animation</h3>
+          <p>Bringing 3D models to life with smooth and engaging animations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+      <div class="contact-left">
+        <div class="icon-circle">
+          <i class="fa-regular fa-paper-plane"></i>
+        </div>
+
+        <div class="contact-text">
+          <h2>Have a project in mind?</h2>
+
+          <p>Let's collaborate and bring your ideas to life.</p>
+        </div>
+      </div>
+
+      <button class="dark-btn" id="getTouchBtn">Get In Touch</button>
+    </section>
+
+    <!-- POPUP -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup-box">
+        <span class="close-popup" id="closePopup">&times;</span>
+
+        <h2>Contact Me</h2>
+
+        <form method="POST" action="{% url 'send_enquiry' %}">
+          {% csrf_token %}
+
+          <input type="text" name="name" placeholder="Your Name" required />
+
+          <input type="email" name="email" placeholder="Your Email" required />
+
+          <input type="text" name="subject" placeholder="Subject" required />
+
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Your Message"
+            required
+          ></textarea>
+
+          <button type="submit" class="dark-btn full-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    {% include 'portfolio/footer.html' %}
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | Tonmoy 3D Artist</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/premium.css' %}" />
+  </head>
+  <body>
+    <header class="navbar">
+      {% include 'portfolio/logo.html' %}
+
+      <nav id="navMenu">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'work' %}">Work</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button">
+        <i class="fa-solid fa-sun"></i>
+        <span class="theme-label">Light</span>
+      </button>
+
+      <a class="nav-btn" href="{% url 'contact' %}">Let's Work Together</a>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+
+    <main class="legal-page">
+      <section class="legal-hero">
+        <p class="small-title">LEGAL</p>
+        <h1>Privacy Policy</h1>
+        <p>Last updated: May 14, 2026</p>
+      </section>
+
+      <section class="legal-content">
+        <h2>Information I Collect</h2>
+        <p>
+          When you contact me through this website, I may collect your name,
+          email address, subject, and message so I can respond to your enquiry.
+        </p>
+
+        <h2>How Your Information Is Used</h2>
+        <p>
+          Your information is used only to communicate with you about project
+          enquiries, freelance work, collaborations, and related services.
+        </p>
+
+        <h2>Sharing Of Information</h2>
+        <p>
+          I do not sell or rent your personal information. I may only share
+          information if required by law or to protect the security of this
+          website.
+        </p>
+
+        <h2>Email Communication</h2>
+        <p>
+          If you send an enquiry, I may reply using the email address you
+          provide. You can request that your contact details be removed from my
+          records at any time.
+        </p>
+
+        <h2>Third-Party Links</h2>
+        <p>
+          This website may link to external portfolio platforms such as
+          ArtStation and Behance. Their privacy practices are governed by their
+          own policies.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          For privacy-related questions, contact me at
+          <a href="mailto:tonmoydeyrick@gmail.com">tonmoydeyrick@gmail.com</a>.
+        </p>
+      </section>
+    </main>
+
+    {% include 'portfolio/footer.html' %}
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

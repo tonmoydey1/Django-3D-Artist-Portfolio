@@ -1,0 +1,302 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Contact | 3D Artist</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/premium.css' %}" />
+  </head>
+
+  <body>
+    <!-- SUCCESS MESSAGE -->
+
+    {% if messages %}
+
+    <div class="message-container">
+      {% for message in messages %}
+
+      <div class="success-popup">{{ message }}</div>
+
+      {% endfor %}
+    </div>
+
+    {% endif %}
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+      {% include 'portfolio/logo.html' %}
+
+      <nav id="navMenu">
+        <a href="{% url 'home' %}"> Home </a>
+
+        <a href="{% url 'about' %}"> About </a>
+
+        <a href="{% url 'work' %}"> Work </a>
+
+        <a href="{% url 'services' %}"> Services </a>
+
+        <a href="{% url 'contact' %}" class="active"> Contact </a>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" type="button">
+        <i class="fa-solid fa-sun"></i>
+        <span class="theme-label">Light</span>
+      </button>
+
+      <a class="dwn"
+        href="{% static 'resume/Tonmoy_Dey_Resume_V5.pdf' %}"
+        download
+        class="light-btn"
+      >
+        Download Resume
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero-section">
+      <div class="hero-left">
+        <p class="small-title">GET IN TOUCH</p>
+
+        <h1>
+          Let's create <br />
+          something amazing <br />
+          <span>together.</span>
+        </h1>
+
+        <p>
+          Have a project in mind or just want to say hello? I'd love to hear
+          from you.
+        </p>
+      </div>
+
+      <div class="hero-right">
+
+        <img src="{% static 'images/profile/tonmoy-dey-portrait.jpeg' %}" alt="Tonmoy Dey portrait" />
+      </div>
+    </section>
+
+    <!-- CONTACT INFO -->
+
+    <section class="contact-info">
+      <div class="info-card">
+        <i class="fa-regular fa-envelope"></i>
+
+        <h3>Email</h3>
+
+        <p>tonmoydeyrick@gmail.com</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fa-solid fa-phone"></i>
+
+        <h3>Phone</h3>
+
+        <p>+91 9476557530</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fa-solid fa-location-dot"></i>
+
+        <h3>Location</h3>
+
+        <p>Bangalore, India</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fa-regular fa-paper-plane"></i>
+
+        <h3>Response Time</h3>
+
+        <p>Usually within 24 hours</p>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+
+    <section class="contact-form-wrapper">
+      <div class="form-left">
+        <h2>Send Me a Message</h2>
+
+        <p>Fill out the form and I'll get back to you shortly.</p>
+
+        <form method="POST" action="{% url 'send_enquiry' %}">
+          {% csrf_token %}
+
+          <div class="input-row">
+            <input type="text" name="name" placeholder="Your Name" required />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+            />
+          </div>
+
+          <input type="text" name="subject" placeholder="Subject" required />
+
+          <textarea
+            name="message"
+            rows="7"
+            placeholder="Your Message"
+            required
+          ></textarea>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+
+      <div class="form-right">
+        <img src="{% static 'images/profile/tonmoy-dey-portrait.jpeg' %}" alt="Tonmoy Dey portrait" />
+      </div>
+    </section>
+
+    <!-- FAQ -->
+
+    <section class="faq-section">
+      <div class="faq-header">
+        <div>
+          <p class="small-title">FAQ</p>
+
+          <h2>Frequently Asked Questions</h2>
+        </div>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What types of projects do you work on?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>
+              I work on characters, environments, product visualization, and
+              game assets.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What is your turnaround time?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>Depending on project size, usually between 3 days to 2 weeks.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you work long-term?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>Yes, I'm open to long-term freelance collaborations.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can you create game-ready assets?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>Yes. I can prepare clean, optimized models with sensible topology, UVs, baked maps, and PBR textures.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Which software do you use?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>I work with Maya, Blender, ZBrush, Substance Painter, Photoshop, and Marvelous Designer depending on the project.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can you match a reference style?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>Yes. Share references, mood boards, or sketches and I can match realistic, stylized, cinematic, or game-art directions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you provide progress updates?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>Yes. I usually share blockout, modeling, texturing, lighting, and final render stages so feedback is easy and timely.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What files can you deliver?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>I can deliver renders and common 3D formats such as FBX, OBJ, blend, Maya files, texture maps, and presentation images.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do we start a project?</h3>
+
+            <span>+</span>
+          </div>
+
+          <div class="faq-answer">
+            <p>Send the idea, references, expected output, deadline, and budget range. I will reply with a clear scope and next steps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+
+    {% include 'portfolio/footer.html' %}
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script>
+  </body>
+</html>
