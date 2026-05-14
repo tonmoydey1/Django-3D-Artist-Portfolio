@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import BadHeaderError
+from smtplib import SMTPException
 
 
 def index(request):
@@ -68,9 +69,12 @@ def send_enquiry(request):
         except BadHeaderError:
             messages.error(request, "Invalid message header. Please try again.")
             return redirect(request.META.get('HTTP_REFERER', '/'))
+        except SMTPException:
+            messages.error(request, "Email could not be sent right now. Please contact me directly.")
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
         messages.success(request, "Message Sent Successfully!")
 
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER', '/'))
 
     return redirect('/')
