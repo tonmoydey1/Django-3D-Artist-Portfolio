@@ -62,13 +62,15 @@ def send_enquiry(request):
             messages.error(request, "Email is not configured yet. Please contact me directly.")
             return redirect(request.META.get('HTTP_REFERER', '/'))
 
+        sent_count = 0
+
         try:
-            send_mail(
+            sent_count = send_mail(
                 subject,
                 full_message,
                 settings.DEFAULT_FROM_EMAIL,
                 ['tonmoydeyrick@gmail.com'],
-                fail_silently=False
+                fail_silently=True
             )
         except BadHeaderError:
             messages.error(request, "Invalid message header. Please try again.")
@@ -82,7 +84,10 @@ def send_enquiry(request):
             messages.error(request, "Email could not be sent right now. Please contact me directly.")
             return redirect(request.META.get('HTTP_REFERER', '/'))
 
-        messages.success(request, "Message Sent Successfully!")
+        if sent_count:
+            messages.success(request, "Message Sent Successfully!")
+        else:
+            messages.error(request, "Email could not be sent right now. Please contact me directly.")
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
