@@ -6,7 +6,7 @@ from django.conf import settings
 import logging
 from .models import Enquiry
 from urllib import parse, request as urlrequest
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 
 
 logger = logging.getLogger(__name__)
@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 def send_web3forms_enquiry(name, email, subject, message):
     if not settings.WEB3FORMS_ACCESS_KEY:
+        logger.warning("Web3Forms access key is missing.")
         return False
 
     payload = parse.urlencode({
@@ -34,9 +35,18 @@ def send_web3forms_enquiry(name, email, subject, message):
 
     try:
         with urlrequest.urlopen(req, timeout=8) as response:
-            return 200 <= response.status < 300
+            response_body = response.read().decode('utf-8', errors='replace')
+            logger.info("Web3Forms response status=%s body=%s", response.status, response_body)
+            return 200 <= response.status < 300 and '"success":true' in response_body.lower()
+    except HTTPError as exc:
+        error_body = exc.read().decode('utf-8', errors='replace')
+        logger.warning("Web3Forms rejected enquiry: status=%s body=%s", exc.code, error_body)
+        return False
     except URLError as exc:
         logger.warning("Web3Forms delivery failed: %s", exc)
+        return False
+    except Exception as exc:
+        logger.exception("Unexpected Web3Forms delivery error: %s", exc)
         return False
 
 
