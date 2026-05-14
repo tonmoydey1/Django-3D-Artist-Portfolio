@@ -7,6 +7,7 @@ from django.conf import settings
 from django.core.mail import BadHeaderError
 from smtplib import SMTPException
 import logging
+from .models import Enquiry
 
 
 logger = logging.getLogger(__name__)
@@ -49,6 +50,13 @@ def send_enquiry(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
+        enquiry = Enquiry.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message,
+        )
+
         full_message = f"""
         Name: {name}
         Email: {email}
@@ -59,7 +67,7 @@ def send_enquiry(request):
         """
 
         if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-            messages.error(request, "Email is not configured yet. Please contact me directly.")
+            messages.success(request, "Message Sent Successfully!")
             return redirect(request.META.get('HTTP_REFERER', '/'))
 
         sent_count = 0
@@ -73,21 +81,22 @@ def send_enquiry(request):
                 fail_silently=True
             )
         except BadHeaderError:
-            messages.error(request, "Invalid message header. Please try again.")
+            messages.success(request, "Message Sent Successfully!")
             return redirect(request.META.get('HTTP_REFERER', '/'))
         except (SMTPException, OSError) as exc:
             logger.warning("Contact form email failed: %s", exc)
-            messages.error(request, "Email could not be sent right now. Please contact me directly.")
+            messages.success(request, "Message Sent Successfully!")
             return redirect(request.META.get('HTTP_REFERER', '/'))
         except Exception as exc:
             logger.exception("Unexpected contact form error: %s", exc)
-            messages.error(request, "Email could not be sent right now. Please contact me directly.")
+            messages.success(request, "Message Sent Successfully!")
             return redirect(request.META.get('HTTP_REFERER', '/'))
 
         if sent_count:
-            messages.success(request, "Message Sent Successfully!")
-        else:
-            messages.error(request, "Email could not be sent right now. Please contact me directly.")
+            enquiry.email_sent = True
+            enquiry.save(update_fields=['email_sent'])
+
+        messages.success(request, "Message Sent Successfully!")
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
